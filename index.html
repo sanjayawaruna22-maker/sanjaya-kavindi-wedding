@@ -99,19 +99,16 @@ body{
 }
 
 .guest-title{
-    color:#666;
-    font-size:20px;
-    font-style:italic;
-    letter-spacing:1px;
+    color:#d4af37;
+    font-size:18px;
+    letter-spacing:2px;
     margin-top:20px;
 }
 
 .guest-name{
     font-size:42px;
-    color:#8B0055;
+    color:#b8860b;
     margin:15px 0 25px;
-    text-transform:uppercase;
-    font-weight:bold;
     animation:zoomIn 1.5s;
 }
 
@@ -129,13 +126,6 @@ body{
     border-radius:15px;
 }
 
-.message{
-    margin:20px;
-    color:#555;
-    font-size:18px;
-    line-height:1.6;
-}
-
 .btn{
     display:inline-block;
     margin:15px;
@@ -151,6 +141,12 @@ body{
 .btn:hover{
     transform:scale(1.08);
     background:#b8860b;
+}
+
+.message{
+    margin:20px;
+    color:#555;
+    font-size:18px;
 }
 
 @keyframes fadeIn{
@@ -198,7 +194,6 @@ body{
 <body>
 
 <!-- Sparkles -->
-
 <div class="sparkle" style="left:10%;animation-delay:0s;"></div>
 <div class="sparkle" style="left:20%;animation-delay:1s;"></div>
 <div class="sparkle" style="left:40%;animation-delay:2s;"></div>
@@ -229,11 +224,11 @@ body{
 <div id="invitation">
 
     <div class="guest-title">
-        With Compliments To
+        ✨ A SPECIAL INVITATION FOR ✨
     </div>
 
     <div class="guest-name" id="guestName">
-        Dear Guest
+        Kavindi Dehemika
     </div>
 
     <div class="card">
@@ -241,13 +236,14 @@ body{
         <img src="Wedding Card.jpg" alt="Wedding Card">
 
         <div class="message">
-            We are honored to invite you to celebrate our special day.
+            We are honored to invite you to celebrate
+            our special day.
         </div>
 
         <a class="btn"
            href="https://maps.app.goo.gl/Y5kDUKM3AfhYaFgG7?g_st=aw"
            target="_blank">
-            📍 View Location
+           📍 View Location
         </a>
 
     </div>
@@ -256,16 +252,12 @@ body{
 
 <script>
 
-// Auto Guest Name from URL
-
 const params = new URLSearchParams(window.location.search);
-const guest = params.get("name");
+const guest = params.get("guest");
 
 if(guest){
-    document.getElementById("guestName").textContent = guest;
+    document.getElementById("guestName").innerText = guest;
 }
-
-// Open Envelope
 
 function openInvitation(){
 
@@ -274,13 +266,15 @@ function openInvitation(){
 
     setTimeout(function(){
 
-        document.getElementById("envelopeContainer")
-            .style.display = "none";
+        document.getElementById(
+            "envelopeContainer"
+        ).style.display="none";
 
-        document.getElementById("invitation")
-            .style.display = "block";
+        document.getElementById(
+            "invitation"
+        ).style.display="block";
 
-        document.body.style.overflow = "auto";
+        document.body.style.overflow="auto";
 
     },1800);
 
