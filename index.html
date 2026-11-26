@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: Georgia, serif;
+    background: linear-gradient(135deg,#fff8e1,#ffffff,#fff3cd);
+    min-height:100vh;
+    overflow:hidden;
+}
+
+/* Envelope Screen */
+
+#envelopeContainer{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.envelope{
+    position:relative;
+    width:340px;
+    height:220px;
+    cursor:pointer;
+}
+
+.front{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:#d4af37;
+    border-radius:10px;
+    z-index:3;
+    box-shadow:0 0 25px rgba(0,0,0,.2);
+}
+
+.flap{
+    position:absolute;
+    width:100%;
+    height:110px;
+    background:#c59d2f;
+    clip-path:polygon(0 0,100% 0,50% 100%);
+    transform-origin:top;
+    transition:1.5s;
+    z-index:4;
+}
+
+.letter{
+    position:absolute;
+    left:5%;
+    top:20px;
+    width:90%;
+    height:180px;
+    background:white;
+    border-radius:10px;
+    padding:20px;
+    z-index:2;
+    text-align:center;
+    transition:1.5s;
+}
+
+.letter h2{
+    color:#b8860b;
+    margin-top:25px;
+}
+
+.letter p{
+    color:#555;
+    margin-top:10px;
+}
+
+.open .flap{
+    transform:rotateX(180deg);
+}
+
+.open .letter{
+    transform:translateY(-180px);
+}
+
+/* Invitation */
+
+#invitation{
+    display:none;
+    text-align:center;
+    padding:20px;
+    animation:fadeIn 2s;
+}
+
+.guest-title{
+    color:#d4af37;
+    font-size:18px;
+    letter-spacing:2px;
+    margin-top:20px;
+}
+
+.guest-name{
+    font-size:42px;
+    color:#b8860b;
+    margin:15px 0 25px;
+    animation:zoomIn 1.5s;
+}
+
+.card{
+    max-width:650px;
+    margin:auto;
+    background:white;
+    border-radius:20px;
+    padding:15px;
+    box-shadow:0 0 30px rgba(212,175,55,.4);
+}
+
+.card img{
+    width:100%;
+    border-radius:15px;
+}
+
+.btn{
+    display:inline-block;
+    margin:15px;
+    padding:14px 28px;
+    background:#d4af37;
+    color:white;
+    text-decoration:none;
+    border-radius:50px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:scale(1.08);
+    background:#b8860b;
+}
+
+.message{
+    margin:20px;
+    color:#555;
+    font-size:18px;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes zoomIn{
+    from{
+        transform:scale(0);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.sparkle{
+    position:fixed;
+    width:6px;
+    height:6px;
+    background:gold;
+    border-radius:50%;
+    animation:sparkle 5s linear infinite;
+    opacity:.6;
+}
+
+@keyframes sparkle{
+    from{
+        transform:translateY(-100px);
+    }
+    to{
+        transform:translateY(110vh);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Sparkles -->
+<div class="sparkle" style="left:10%;animation-delay:0s;"></div>
+<div class="sparkle" style="left:20%;animation-delay:1s;"></div>
+<div class="sparkle" style="left:40%;animation-delay:2s;"></div>
+<div class="sparkle" style="left:60%;animation-delay:3s;"></div>
+<div class="sparkle" style="left:80%;animation-delay:4s;"></div>
+
+<!-- Envelope -->
+
+<div id="envelopeContainer">
+
+    <div class="envelope" onclick="openInvitation()">
+
+        <div class="flap"></div>
+
+        <div class="front"></div>
+
+        <div class="letter">
+            <h2>💌 Wedding Invitation</h2>
+            <p>Tap To Open</p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Invitation -->
+
+<div id="invitation">
+
+    <div class="guest-title">
+        ✨ A SPECIAL INVITATION FOR ✨
+    </div>
+
+    <div class="guest-name" id="guestName">
+        Kavindi Dehemika
+    </div>
+
+    <div class="card">
+
+        <img src="Wedding Card.jpg" alt="Wedding Card">
+
+        <div class="message">
+            We are honored to invite you to celebrate
+            our special day.
+        </div>
+
+        <a class="btn"
+           href="https://maps.app.goo.gl/Y5kDUKM3AfhYaFgG7?g_st=aw"
+           target="_blank">
+           📍 View Location
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+const guest = params.get("guest");
+
+if(guest){
+    document.getElementById("guestName").innerText = guest;
+}
+
+function openInvitation(){
+
+    document.querySelector(".envelope")
+        .classList.add("open");
+
+    setTimeout(function(){
+
+        document.getElementById(
+            "envelopeContainer"
+        ).style.display="none";
+
+        document.getElementById(
+            "invitation"
+        ).style.display="block";
+
+        document.body.style.overflow="auto";
+
+    },1800);
+
+}
+
+</script>
+
+</body>
+</html>
